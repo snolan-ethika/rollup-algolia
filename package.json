@@ -1,0 +1,24 @@
+{
+  "name": "simple-algolia",
+  "version": "1.0.0",
+  "description": "simple rollup with algolia",
+  "main": "run-bundle.js",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "lint": "tslint --project \"./tsconfig.json\"",
+    "roll-it-up": "rollup --config",
+    "run-bundle": "node run-bundle.js"
+  },
+  "author": "shawn nolan",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "tslint": "^6.1.3",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "algoliasearch": "^4.24.0",
+    "dotenv": "^16.4.5"
+  }
+}
