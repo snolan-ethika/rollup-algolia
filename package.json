@@ -20,5 +20,9 @@
   "dependencies": {
     "algoliasearch": "^4.24.0",
     "dotenv": "^16.4.5"
+  },
+  "keywords": ["algolia", "rollupjs"],
+  "repository": {
+    "url": "https://github.com/snolan-ethika/rollup-algolia"
   }
 }
