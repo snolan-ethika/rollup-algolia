@@ -12,4 +12,28 @@ const getPageObject = async (path) => {
 	return pageIdx.getObject(path);
 }
 
-export default getPageObject
+const getMultiQuery = async () => {
+	const queries = [
+		{
+			indexName: 'products',
+			query: '',
+			params: {
+				filters: 'page_slugs:"/shop/boys" AND facet-division.lvl0:Men',
+				hitsPerPage: 60,
+			},
+			page: 0,
+		},
+		{
+			indexName: 'products',
+			query: '',
+			params: {
+				filters: 'page_slugs:"/shop/women"',
+				hitsPerPage: 60,
+			},
+		}
+	];
+	const response = await pageClient.multipleQueries(queries, { strategy: 'stopIfEnoughMatches' });
+	return response
+}
+
+export { getPageObject, getMultiQuery }

@@ -1,4 +1,7 @@
-import getPageObject from './algolia-setup'
+import { getPageObject, getMultiQuery } from './algolia-setup'
 export default async function () {
-	return await getPageObject('/shop')
+	// const thePage = await getPageObject('/shop')
+	// console.log('thePage', thePage)
+	const results = await getMultiQuery()
+	console.log('results', results)
 }
