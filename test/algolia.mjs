@@ -53,43 +53,6 @@ const facets2 = {
 		'4T': 5
 	}
 }
-const facets4 = {
-	'facet-fit.lvl0': {
-		'Hats & Beanies': 2,
-		'Underwear': 2,
-		'Accessories': 1
-	},
-	'facet-fit.lvl1': {
-		'Hats & Beanies > Melin Hat': 2,
-		'Underwear > Men\'s Staple': 2,
-		'Accessories > Cashmere Scarf': 1
-	},
-	'facet-division.lvl0': {
-		'Men': 5,
-		'Women': 3
-	},
-	'facet-product-line.lvl0': {
-		'Premium': 4,
-		'Lifestyle': 1
-	},
-	'facet-collaboration.lvl0': {
-		'Melin Series': 2
-	},
-	'sizes_available_in_stock': {
-		'L': 2,
-		'M': 2,
-		'S': 2,
-		'XL': 2,
-		'XXL': 2,
-		'ONS': 1,
-		'XXXL': 1
-	}
-}
-const queries = {
-	'hierarchicalMenu': {
-		'facet-fit.lvl0': 'Underwear'
-	}
-}
 const mensFacets = {
 	'facet-fit.lvl0': {
 		'Underwear': 341,
@@ -228,7 +191,6 @@ const buildFacetLinks = ( facets ) => {
 				const splitTitle = res2.split( '.' )
 				if (splitTitle) {
 					const parentTag = splitTitle[0].split( '-' )
-					const parentFacet = res2.split( '.' )
 					const displayName = parentTag[parentTag.length - 1]
 					let tempObj = {}, groupedObj = {}
 					const facetKey = Object.keys( facets[res2] )
@@ -363,19 +325,6 @@ const newFacetLookup = ( facets ) => {
 	return tempFacets
 }
 
-const buildRouteQueries = ( query ) => {
-	let tempQueries = ''
-	const queryKeys = Object.keys( query )
-	//object.hasOwnProperty('key')
-	console.log( 'queryKeys', queryKeys )
-	queryKeys.forEach( key => {
-		const tempKey = {}
-		const queryKey = Object.keys( queries[key] )
-		console.log( 'queryKey', queryKey )
-	} )
-	return tempQueries
-}
-
 const buildSizeLinks = (query) => {
 	let queryString = ''
 	Object.keys( query )?.map( ( key ) => {
@@ -478,13 +427,11 @@ const newFacetLinks = ( facets ) => {
 describe( 'testing building custom facets', () => {
 	it( 'should build facets', () => {
 		const navigation = buildFacetLinks( facets1 )
-		console.log( 'navigation', navigation?.sizes )
 		chai.expect( navigation?.facets ).to.have.lengthOf( 3 )
 		chai.expect( navigation?.sizes ).to.have.lengthOf( 3 )
 	} )
 	it( 'should build raw facets', () => {
 		const rawFacets = buildRawFacets( facets2 )
-		console.log( 'rawFacets', rawFacets )
 		chai.expect( rawFacets ).to.have.lengthOf( 6 )
 	} )
 	it( 'should build facets for lookup', () => {
@@ -493,47 +440,17 @@ describe( 'testing building custom facets', () => {
 	} )
 	it( 'should build NEW facets for lookup', () => {
 		const facetLookup = newFacetLookup( [ '"facet-fit.lvl1:Underwear%20%3E%20Men\'s%20Staple"' ] )
-		console.log( 'facetLookup', facetLookup )
 		chai.expect( facetLookup ).to.equal( '("facet-fit.lvl1:"Underwear > Men\'s Staple"")' )
 	} )
-	it( 'should test kids facets', () => {
-		const navigation = buildFacetLinks( [] )
-		console.log( 'navigation', navigation )
-	} )
-	it( 'should test facets4', () => {
-		const navigation = buildFacetLinks( facets4 )
-		console.log( 'navigation', navigation )
-	} )
-	it( 'should build route queries', () => {
-		const routeQueries = buildRouteQueries( queries )
-	} )
 	it( 'should test buildSizeLinks', () => {
-		/*
-		{
-	"t": "facet-fit.lvl1:Pullovers%20%26%20Hoodies%20%3E%20Pullover%20Hoodie",
-	"z": "sizes_available_in_stock%3AXXL"
-}
-		 */
 		const links = buildSizeLinks( {
-			// 't': 'facet-fit.lvl1:Underwear%20%3E%20Mid',
+			't': 'facet-fit.lvl1:Underwear%20%3E%20Mid',
 			'z': 'sizes_available_in_stock%3AL'
 		} )
-		console.log( 'links', links )
-	} )
-	it( 'should build display name', () => {
-		const arr = [ 'facet-fit.lvl1:Footwear > Slides' ]
-		const tagNav = {
-			tag: {
-				identifier: 'facet-fit.lvl1',
-				display_name: 'Footwear > Slides'
-			}
-		}
-		const compareRouteTags = `${ tagNav?.tag?.identifier }:${ tagNav?.tag?.display_name }`
-		const tagExists = arr.includes( compareRouteTags )
-		console.log( 'includes', tagExists )
+		chai.expect( links ).to.equal( '?t=facet-fit.lvl1:Underwear%20%3E%20Mid&z=sizes_available_in_stock:L' )
 	} )
 	it( 'should build new facets', () => {
 		const navigation = newFacetLinks( mensFacets )
-		console.log( 'navigation', navigation?.facets[0].children )
+		chai.expect(navigation?.facets[0].children?.length ).to.equal( 4 )
 	} )
 } )
