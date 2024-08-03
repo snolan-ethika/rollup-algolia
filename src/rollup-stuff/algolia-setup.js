@@ -32,8 +32,7 @@ const getMultiQuery = async () => {
 			},
 		}
 	];
-	const response = await pageClient.multipleQueries(queries, { strategy: 'stopIfEnoughMatches' });
-	return response
+	return pageClient.multipleQueries(queries, { strategy: 'stopIfEnoughMatches' });
 }
 
 export { getPageObject, getMultiQuery }
