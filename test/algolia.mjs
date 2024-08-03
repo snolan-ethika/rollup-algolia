@@ -1,5 +1,6 @@
-// import * as chai from 'chai'
-const chai = require('chai');
+import * as chai from 'chai'
+// const chai = require('chai');
+
 const facets1 = {
 	'facet-fit.lvl0': {
 		'Underwear': 1
