@@ -1,5 +1,4 @@
 import * as chai from 'chai'
-// const chai = require('chai');
 
 const facets1 = {
 	'facet-fit.lvl0': {
@@ -25,36 +24,6 @@ const facets1 = {
 	}
 }
 const facets2 = {
-	'facet-fit.lvl0': {
-		'Underwear': 15
-	},
-	'facet-fit.lvl1': {
-		'Underwear > Boys\' Staple': 5,
-		'Underwear > JR Staple': 5,
-		'Underwear > Toddlers\' Staple': 5
-	},
-	'facet-division.lvl0': {
-		'Kids': 15
-	},
-	'facet-division.lvl1': {
-		'Kids > Boys': 5,
-		'Kids > Girls': 5,
-		'Kids > Toddlers': 5
-	},
-	'facet-product-line.lvl0': {
-		'Lifestyle': 10,
-		'Performance': 5
-	},
-	'sizes_available_in_stock': {
-		'M': 10,
-		'S': 10,
-		'L': 9,
-		'2T': 5,
-		'3T': 5,
-		'4T': 5
-	}
-}
-const kidsFacets = {
 	'facet-fit.lvl0': {
 		'Underwear': 15
 	},
@@ -116,87 +85,9 @@ const facets4 = {
 		'XXXL': 1
 	}
 }
-const facets5 = {
-	'facet-fit.lvl0': {
-		'Underwear': 1,
-		'Bras': 1
-	},
-	'facet-fit.lvl1': {
-		'Underwear > Toddlers\' Staple': 1,
-		'Bras > Bikini': 1
-	}
-}
 const queries = {
 	'hierarchicalMenu': {
 		'facet-fit.lvl0': 'Underwear'
-	}
-}
-const realWorld = {
-	'facet-fit.lvl0': {
-		'Underwear': 262,
-		'Bras': 196,
-		'Pants & Tights': 49,
-		'Shorts': 25,
-		'Tops & T-Shirts': 24,
-		'Bodysuits': 19,
-		'Pullovers & Hoodies': 7
-	},
-	'facet-fit.lvl1': {
-		'Bras > Sports Bra': 92,
-		'Underwear > Women\'s Staple': 89,
-		'Bras > Bralette Bra': 36,
-		'Underwear > Cheeky': 33,
-		'Underwear > Thong': 29,
-		'Underwear > Shorty': 27,
-		'Underwear > Bikini': 23,
-		'Bras > Triangle Bra': 22,
-		'Underwear > Brazilian Cheeky': 21,
-		'Pants & Tights > Women\'s Leggings': 19,
-		'Shorts > Biker Short': 19,
-		'Pants & Tights > Full Length Tight': 17,
-		'Underwear > Brazilian Thong': 17,
-		'Bras > PullOver Bra': 16,
-		'Underwear > Hipster': 14,
-		'Bras > V-Neck Bra': 13,
-		'Bras > High-Neck Bra': 11,
-		'Pants & Tights > High Waisted Tight': 11,
-		'Tops & T-Shirts > High-Neck Tank Top': 7,
-		'Underwear > Seamless Thong': 7,
-		'Pullovers & Hoodies > Pullover Hoodie': 6,
-		'Shorts > Sweatshort': 5,
-		'Bras > Bandeau Bra': 4,
-		'Tops & T-Shirts > Cropped Tank Top': 4,
-		'Tops & T-Shirts > The Fitted Crew': 4,
-		'Tops & T-Shirts > Boyfriend Tee': 3,
-		'Tops & T-Shirts > V-Neck Tee': 3,
-		'Bras > Full Triangle Bra': 2,
-		'Pants & Tights > Sweatpants': 2,
-		'Tops & T-Shirts > Distressed Tee': 2,
-		'Underwear > Seamless Hipster': 2,
-		'Pullovers & Hoodies > Crew Neck': 1,
-		'Tops & T-Shirts > Cami Set': 1,
-		'Tops & T-Shirts > Graphic Tee': 1
-	},
-	'facet-division.lvl0': {
-		'Women': 581
-	},
-	'facet-product-line.lvl0': {
-		'Lifestyle': 419,
-		'Performance': 93,
-		'Premium': 84
-	},
-	'facet-collaboration.lvl0': {
-		'Rolling Loud Series': 1
-	},
-	'sizes_available_in_stock': {
-		'XS': 581,
-		'L': 540,
-		'XL': 538,
-		'M': 521,
-		'S': 507,
-		'4XL': 114,
-		'XXXL': 102,
-		'XXL': 99
 	}
 }
 const mensFacets = {
@@ -324,30 +215,6 @@ const mensFacets = {
 		'S|M': 1
 	}
 }
-
-/*
- * example object of tags
-{
-    "tag": {
-        "_id": "648353dd801c705edf0d49b3",
-        "display_name": "green test",
-        "group": "custom",
-        "icon_in_nav": false,
-        "link_type": "None",
-        "name": "green",
-        "nav_type": "Navigation",
-        "parent_tag": "",
-        "priority": 3,
-        "short_name": "green test"
-    },
-    "children": [],
-    "count": 441,
-    "depth": 0,
-    "is_active": false,
-    "url": "/shop/kids",
-    "url_no_group": "/shop/kids"
-}
- */
 
 const buildFacetLinks = ( facets ) => {
 	let tempFacets = []
