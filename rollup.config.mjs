@@ -2,7 +2,7 @@
 export default {
 	input: 'src/rollup-stuff/main.js',
 	output: {
-		file: 'dist/bundle.js',
-		format: 'cjs'
+		file: 'dist/bundle.mjs',
+		format: 'es'
 	}
 };

@@ -1,38 +1,32 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 import algoliasearch from 'algoliasearch'
 
-const pageIndex = 'pages';
+const pageIndex = process.env.pageIndex;
+const productIndex = process.env.productsIndex;
 const pageClient = algoliasearch(
-	process.env.VITE_algolia_id, // insert your appId
-	process.env.VITE_algolia_api_key // insert your apiKey
+	process.env.algolia_id, // insert your appId
+	process.env.algolia_api_key // insert your apiKey
 );
-const pageIdx = pageClient.initIndex(pageIndex);
+const pageIdx = pageClient.initIndex( pageIndex )
+const productIdx = pageClient.initIndex( productIndex )
 
-const getPageObject = async (path) => {
-	return pageIdx.getObject(path);
+export const getThePage = async ( thePage ) => {
+	let page
+	try {
+		page = await pageIdx.getObject( thePage )
+	} catch (e) {
+		page = { status: 'catch', message: e?.message || e }
+	}
+	return page
 }
 
-const getMultiQuery = async () => {
-	const queries = [
-		{
-			indexName: 'products',
-			query: '',
-			params: {
-				filters: 'page_slugs:"/shop/boys" AND facet-division.lvl0:Men',
-				hitsPerPage: 60,
-			},
-			page: 0,
-		},
-		{
-			indexName: 'products',
-			query: '',
-			params: {
-				filters: 'page_slugs:"/shop/women"',
-				hitsPerPage: 60,
-			},
-		}
-	];
-	return pageClient.multipleQueries(queries, { strategy: 'stopIfEnoughMatches' });
+export const getTheProducts = async ( { query = '', facets = [], filters = {} } ) => {
+	let results
+	try {
+		results = await productIdx.search( query, { facets, filters } )
+	} catch (e) {
+		results = { status: 'catch', message: e?.message || e }
+	}
+	return results
 }
-
-export { getPageObject, getMultiQuery }
